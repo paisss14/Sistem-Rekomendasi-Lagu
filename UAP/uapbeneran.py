@@ -39,3 +39,67 @@ def quick_sort(arr):
     kiri  = [x for x in arr[1:] if x.rating >= pivot.rating]
     kanan = [x for x in arr[1:]if x.rating  <  pivot.rating]
     return quick_sort(kiri) + [pivot] + quick_sort(kanan)
+
+class SistemMusik:
+    
+  def_init_(self):
+    self.daftar_lagu = []
+    self.tumpukan = []
+    self.antrian = []
+    self.playlist = LinkedList() 
+
+  def tambah_lagu(self, lagu):
+    self.daftar_lagu.append(lagu) 
+    self.playlist.tambah(lagu) 
+
+  def ambil_lagu(self):
+    return self.daftar_lagu
+
+  def ubah_lagu(self,judul,artis_baru,genre_baru,rating_baru):
+    for lagu in self.daftar_lagu:
+      if lagu.judul.lower() == judul.lower():
+         lagu.artis = artis_baru
+         lagu.genre = genre_baru
+         lagu.rating = int(rating_baru) 
+         return True
+    return False
+
+  def hapus_lagu(self,judul):
+    for lagu in self.daftar_lagu:
+      if lagu.judul.lower() == judul.lower():
+         self.daftar_lagu.remove(lagu) 
+         return True
+    return False
+
+  def cari_lagu(self,judul):
+    terurut=sorted(self.daftar_lagu
+            key=lambda x: x.judul.lower()) 
+    return binary_search(terurut,judul) 
+
+  def rekomendasi(self):
+    return quick_sort(self.daftar_lagu) 
+
+  def putar_lagu(self,judul):
+    for lagu in self.daftar_lagu:
+      if lagu.judul.lower() == judul.lower():
+         self.tumpukan.append(lagu) 
+         return lagu
+    return None
+
+  def masuk_antrian(self.judul):
+    for lagu in self.daftar_lagu:
+      if lagu.judul.lower() == judul.lower():
+         self.antrian.append(lagu) 
+         return True
+    return False
+
+  def lagu_berikutnya(self):
+    if not self.antrian:
+       return None
+
+    lagu = self.antrian.pop(0) 
+    self.tumpukan.append(lagu) 
+    return lagu
+
+
+
