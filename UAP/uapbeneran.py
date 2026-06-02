@@ -101,5 +101,59 @@ class SistemMusik:
     self.tumpukan.append(lagu) 
     return lagu
 
+class AplikasiMusik:
+    def __init__(self, root):
+        self.sistem = SistemMusik()
+        self.root = root
+        self.root.title("Sistem Rekomendasi Lagu")
+        self.root.geometry("860x580")
+        self.root.resizable(False, False)
+
+        self._buat_form()
+        self._buat_tombol()
+        self._buat_listbox()
+
+    def _buat_form(self):
+        label = ["Judul", "Artis", "Genre", "Rating (1-10)"]
+        self.entri = {}
+        for i, teks in enumerate(label):
+            tk.Label(self.root, text=teks, anchor="w", widht=12).grid(
+                row=i, column=0, padx=8, pady=4, sticky="w")
+            e = tk.Entry(self.root, widht=30)
+            e.grid(row=i, column=1, padx=4, pady=4)
+            self.entri[teks] = e
+
+    def _buat_tombol(self):
+        tombol - [
+            ("Tambah Lagu",    self.tambah_lagu),
+            ("Update Lagu",    self.ubah_lagu),
+            ("Hapus Lagu",     self.hapus_lagu),
+            ("Cari Lagu",      self.putar_lagu),
+            ("Rekomendasi",    self.rekomendasi),
+            ("Putar Lagu",     self.putar_lagu),
+            ("Masuk Antrian",  self.masuk_antrian),
+            ("Lagu Berikutnya",self.lagu_berikutnya),
+            ("Riwayat",        self.tampilkan_riwayat),
+            ("Tampilkan Semua",self.tampilkan_semua),
+        ]
+        for i, (teks, perintah) i enumerate(tombol):
+            tk.Button(self.root, text=teks, widht=18, command=perintah).grid(
+                row=i, column=2, padx=8, pady=3)
+        
+    def _buat_listbox(self):
+        self.kotak_daftar = tk.Listbox(self.root, widht=95, height=18,
+                                       font=(Courier", 9))
+        self.kotak_daftar.grid(row=10, column=0, columnspan=3,
+                               padx=8, pady=8)
+
+    def _nilai(self, kunci):
+        return self.entri[kunci].get().strip()
+
+    def _refresh(self, daftar, judul_header="=== DAFTAR LAGU ==="):
+        self.kotak_daftar.delete(0, tk.END)
+        self.kotak_daftar.insert(tk.END, judul_header)
+        for lagu in daftar:
+            self.kotak_daftar.insert(tk.END, str(lagu))
+
 
 
